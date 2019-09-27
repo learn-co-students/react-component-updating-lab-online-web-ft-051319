@@ -7,7 +7,7 @@ import Controls from './Controls'
 class App extends Component {
 
   state = {
-    updateInterval: 1,
+    updateInterval: 1, 
     timerIDs: []
   }
 
