@@ -10,7 +10,28 @@ class Timer extends Component {
     };
   }
 
-  //Your code here
+  // `shouldComponentUpdate` useful in stopping unwanted component updates 
+  // Mainly used for performance enhancement
+  // Can also have `class Timer extends React.PureComponent` instead 
+  // Pure components do not implement `shouldComponentUpdate`.
+  // Instead, a pure component automatically does a
+  // comparison of current and next props and state,
+  // and only updates if it registers a change.
+  // implements `shouldComponentUpdate` with a shallow prop and state comparison
+  // React.PureComponent’s shouldComponentUpdate() skips
+  // prop updates for the whole component subtree.
+  // Make sure all the children components are also “pure”.
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.time === nextState.time) {
+      return false
+    }
+    return true
+  }
+
+  // useful for DOM manipulation and updating 3rd party libraries
+  componentDidUpdate() {
+    this.timer.current.style.color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  }
 
   componentDidMount() {
     this.interval = setInterval(
